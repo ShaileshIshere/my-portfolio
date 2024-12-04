@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Parallax Animation</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			background: #000;
+			overflow-x: hidden;
+		}
+
+		#hero {
+			position: relative;
+			min-height: 100dvh;
+		}
+
+		#portfolio-wrapper {
+			width: 100%;
+			height: 100dvh;
+			position: absolute;
+			pointer-events: none;
+			z-index: 0;
+		}
+
+		#mobile-hero {
+			display: none;
+			width: 100%;
+			height: 100dvh;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 1;
+			background-image: url('parallax/keyart-mobile.png');
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+
+		div[id*='portfolio-bg-'] {
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center bottom;
+			width: 120%;
+			height: 120vh;
+			position: absolute;
+			top: -10vh;
+			left: -10%;
+			z-index: 0;
+			will-change: transform;
+			transform: translateZ(0);
+			backface-visibility: hidden;
+			-webkit-backface-visibility: hidden;
+			transition: none;
+			image-rendering: optimizeSpeed;
+		}
+
+		@media (max-width: 1024px) {
+			div[id*='portfolio-bg-'] {
+				width: 140%;
+				left: -10%;
+			}
+		}
+
+		@media (max-width: 768px) {
+			div[id*='portfolio-bg-'] {
+				width: 160%;
+				left: -30%;
+			}
+			#portfolio-wrapper {
+				display: none;
+			}
+			#mobile-hero {
+				display: block;
+			}
+		}
+
+		#portfolio-bg-1 { background-image: url('public/parallax/parallax0.png'); }
+		#portfolio-bg-2 { background-image: url('public/parallax/parallax1.png'); }
+		#portfolio-bg-3 { background-image: url('public/parallax/parallax2.png'); }
+		#portfolio-bg-4 { background-image: url('public/parallax/parallax3.png'); }
+		#portfolio-bg-5 { background-image: url('public/parallax/parallax4.png'); }
+		#portfolio-bg-6 { background-image: url('public/parallax/parallax5.png'); }
+		#portfolio-bg-7 { background-image: url('public/parallax/parallax6.png'); }
+		#portfolio-bg-8 { background-image: url('public/parallax/parallax7.png'); }
+		#portfolio-bg-9 { 
+			background-image: url('public/parallax/parallax8.png');
+			top: 25vh;
+			background-size: contain;
+			transform: scale(1.5);
+		}
+
+		.spacer {
+			height: 200vh;
+			position: relative;
+			background: linear-gradient(to bottom, #210002 0%, #210002 5%, #000000 100%);
+			margin-top: 90vh;
+			z-index: 1;
+		}
+
+		@media (max-width: 768px) {
+			.spacer {
+				margin-top: 0;
+				height: 100vh;
+			}
+		}
+	</style>
+</head>
+<body>
+	<section id="hero">
+		<div id="mobile-hero"></div>
+		<div id="portfolio-wrapper">
+			<div id="portfolio-bg-1" data-speed="0.3"></div>
+			<div id="portfolio-bg-2" data-speed="0.6"></div>
+			<div id="portfolio-bg-3" data-speed="1.8"></div>
+			<div id="portfolio-bg-4" data-speed="2.7"></div>
+			<div id="portfolio-bg-5" data-speed="3.8"></div>
+			<div id="portfolio-bg-6" data-speed="4.6"></div>
+			<div id="portfolio-bg-7" data-speed="5.8"></div>
+			<div id="portfolio-bg-8" data-speed="7"></div>
+			<div id="portfolio-bg-9" data-speed="12"></div>
+		</div>
+	</section>
+	<div class="spacer"></div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+	<script>
+		// Register ScrollTrigger plugin
+		gsap.registerPlugin(ScrollTrigger);
+
+		// Debounce function to limit resize calculations
+		function debounce(func, wait) {
+			let timeout;
+			return function executedFunction(...args) {
+				const later = () => {
+					clearTimeout(timeout);
+					func(...args);
+				};
+				clearTimeout(timeout);
+				timeout = setTimeout(later, wait);
+			};
+		}
+
+		// Optimize resize handling
+		const handleResize = debounce(() => {
+			ScrollTrigger.refresh();
+		}, 100);
+
+		window.addEventListener('resize', handleResize);
+
+		// Air
+		const portfolioWrapper = document.querySelector('#portfolio-wrapper')
+		const portfolioBG = portfolioWrapper.querySelectorAll('div[id*="portfolio-bg-"]')
+
+		// Preload and optimize images
+		const preloadImages = () => {
+			const imageCache = new Map();
+			
+			portfolioBG.forEach(bg => {
+				const url = window.getComputedStyle(bg).backgroundImage.slice(5, -2);
+				if (!imageCache.has(url)) {
+					const img = new Image();
+					img.src = url;
+					imageCache.set(url, img);
+				}
+			});
+		}
+		
+		window.addEventListener('load', preloadImages);
+
+		const tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: portfolioWrapper,
+				start: 'top top',
+				end: '+=150%',
+				scrub: 0.5,
+				pin: true,
+				pinSpacing: false,
+				fastScrollEnd: true,
+				preventOverlaps: true
+			}
+		})
+
+		// Optimize animation by using transform3d instead of just y translation
+		// Background layers (1-4) move very subtly
+		for(let i = 1; i <= 4; i++) {
+			const bg = document.querySelector(`#portfolio-bg-${i}`)
+			tl.to(bg, {
+				y: -15 * parseFloat(bg.getAttribute('data-speed')),
+				duration: 1,
+				force3D: true,
+				ease: "none"
+			}, 0)
+		}
+
+		// Middle layers (5-7) move a bit more
+		for(let i = 5; i <= 7; i++) {
+			const bg = document.querySelector(`#portfolio-bg-${i}`)
+			tl.to(bg, {
+				y: -35 * parseFloat(bg.getAttribute('data-speed')),
+				duration: 1,
+				force3D: true,
+				ease: "none"
+			}, 0)
+		}
+
+		// Foreground layers (8-9) move the most
+		for(let i = 8; i <= 9; i++) {
+			const bg = document.querySelector(`#portfolio-bg-${i}`)
+			tl.to(bg, {
+				y: -50 * parseFloat(bg.getAttribute('data-speed')),
+				duration: 1,
+				force3D: true,
+				ease: "none"
+			}, 0)
+		}
+
+		// Optimize Lenis smooth scrolling
+		const lenis = new Lenis({
+			smoothWheel: true,
+			wheelMultiplier: 0.8,
+			lerp: 0.1,
+			syncTouch: true
+		})
+
+		lenis.on('scroll', ScrollTrigger.update)
+
+		gsap.ticker.add((time) => {
+			lenis.raf(time * 1000)
+		})
+
+		gsap.ticker.lagSmoothing(0)
+	</script>
+</body>
+</html>
