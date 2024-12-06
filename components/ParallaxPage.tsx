@@ -5,7 +5,7 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 import Lenis from '@studio-freight/lenis';
 import { motion } from 'framer-motion';
-import MagnetButton from './MagnetButton';
+import MagnetButton from './About/MagnetButton';
 
 const ParallaxPage = () => {
   const portfolioWrapperRef = useRef<HTMLDivElement>(null);

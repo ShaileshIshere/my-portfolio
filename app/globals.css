@@ -13,6 +13,12 @@ body {
   overflow-x: hidden;
 }
 
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px white;
+  text-stroke: 2px white;
+}
+
 @media (max-width: 1024px) {
   div[id*='portfolio-bg-'] {
     width: 140%;
