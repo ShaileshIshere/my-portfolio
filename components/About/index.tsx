@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from 'framer-motion';
-import MagnetButton from './MagnetButton';
+import MagnetButton from '@/components/MagnetButton';
 import { Poiret_One, Sulphur_Point } from 'next/font/google'
 
 const Poiret_One_Font = Poiret_One({
@@ -75,7 +75,13 @@ const About = () => {
                 window.open("https://github.com/ShaileshIshere", "_blank");
               }}
             >
-              <MagnetButton />
+              <MagnetButton 
+                width="17rem"
+                height="17rem"
+                className="bg-[#1f2937]"
+              >
+                <span className="text-2xl font-medium text-gray-200">Get In Touch</span>
+              </MagnetButton>
             </div>
 
             <motion.div className={`w-full lg:w-[60%] text-center text-white text-[1.5vw] lg:text-left leading-[4vh] ${Sulphur_Point_Font.className}`}>

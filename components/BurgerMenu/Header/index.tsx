@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import BurgerButton from './BurgerButton'
-import Nav from '../Nav'
+import Nav from '@/components/BurgerMenu/Nav'
 
 export default function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false)

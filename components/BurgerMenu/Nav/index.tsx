@@ -3,9 +3,9 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { menuSlide } from '@/lib/animations'
-import Curve from '../Curve'
-import NavLink from './NavLink'
-import MagneticLink from './MagneticLink'
+import Curve from '@/components/BurgerMenu/Curve'
+import NavLink from '@/components/BurgerMenu/Nav/NavLink'
+import MagneticLink from '@/components/BurgerMenu/Nav/MagneticLink'
 
 interface NavItem {
   title: string
@@ -19,12 +19,16 @@ const navItems: NavItem[] = [
   { title: "Contact", href: "#contact" }
 ]
 
-const socialLinks = [
-  "Discord",
-  "Instagram",
-  "Twitter / X",
-  "LinkedIn"
-]
+interface SocialLinks {
+  [key: string]: string
+}
+
+const socialLinks: SocialLinks = {
+  "Discord": 'https://discord.gg/fP93Rezq',
+  "Instagram": 'https://www.instagram.com/_justt.shailesh/',
+  "Twitter / X": 'https://x.com/_justShailesh',
+  "LinkedIn": 'https://www.linkedin.com/in/shailesh-kandari-a33112299/'
+}
 
 interface NavProps {
   isOpen: boolean
@@ -88,10 +92,10 @@ export default function Nav({ isOpen, onClose }: NavProps) {
             <div>
               <div className="text-[0.875rem] tracking-widest uppercase text-[#999999] mb-8">Socials</div>
               <div className="flex gap-10">
-                {socialLinks.map((link) => (
+                {Object.entries(socialLinks).map(([link, href]) => (
                   <MagneticLink 
                     key={link} 
-                    href="#"
+                    href={href}
                   >
                     {link}
                   </MagneticLink>

@@ -1,0 +1,7 @@
+.noCursor {
+    cursor: none !important;
+}
+
+.noCursor * {
+    cursor: none !important;
+}
