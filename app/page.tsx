@@ -11,10 +11,7 @@ const Page = () => {
       <Home />
       <About />
       <ProjectsGalary />
-      <section id="contact" className="min-h-screen flex items-center justify-center relative z-[1] bg-indigo-900">
-        {/* Contact section content will go here */}
-        <Contacts />
-      </section>
+      <Contacts />
     </main>
   );
 }
