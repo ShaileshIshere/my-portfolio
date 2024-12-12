@@ -50,7 +50,7 @@ const ProjectsGalary = () => {
     target: container,
     offset: ["start end", "end start"]
   })
-  const height = useTransform(scrollYProgress, [0, 0.95], [950, 0])
+  const height = useTransform(scrollYProgress, [0, 0.97], [1200, 0])
 
   const [modal, setModal] = useState<{active: boolean, index: number}>({
     active: false, 
@@ -80,7 +80,7 @@ const ProjectsGalary = () => {
       </section>
       
       {/* Curved div structure */}
-      <div className="w-full bg-[#001731]" style={{ height: '450px', marginTop: '-50px' }}>
+      <div className="w-full bg-black" style={{ height: '500px', marginTop: '-50px' }}>
         <motion.div style={{height}} className="relative w-full">
           <div 
             className="absolute w-[120%] -left-[10%] origin-top z-10"
@@ -88,7 +88,7 @@ const ProjectsGalary = () => {
               height: '100%',
               borderRadius: '0 0 50% 50%',
               backgroundColor: 'black',
-              boxShadow: '0px 60px 50px rgba(255, 255, 255, 0.3)'
+              boxShadow: '0px 60px 50px rgba(0, 0, 0, 0.7)'
             }}
           />
         </motion.div>

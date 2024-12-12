@@ -1,0 +1,27 @@
+.animatedGradient {
+    background: linear-gradient(
+        90deg,
+        #3b82f6, /* Blue */
+        #60a5fa, /* Light blue */
+        #00fafa, /* Mint green */
+        #64fff7, /* Soft green */
+        #44bdff, /* Sky blue */
+        #dbeafe  /* Pale blue */
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 5s ease-in-out infinite;
+  }
+  
+  @keyframes gradientMove {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }

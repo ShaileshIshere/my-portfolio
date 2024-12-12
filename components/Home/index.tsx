@@ -3,9 +3,10 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
-import Lenis from '@studio-freight/lenis';
+import Lenis from 'lenis';
 import { motion } from 'framer-motion';
 import { Bebas_Neue, Lobster } from 'next/font/google';
+import styles from './CreativityText.module.css';
 
 const Bebas_Neue_Font = Bebas_Neue({
   weight: '400',
@@ -184,12 +185,39 @@ const Home = () => {
   }
 
   return (
-    <section id="home" className="relative min-h-[100dvh] mb-[90vh]">
+    <section id="home" className="relative min-h-[100dvh] md:mb-[90vh]">
       <div 
         id="mobile-hero" 
-        className="hidden w-full h-[100dvh] absolute top-0 left-0 z-10 bg-cover bg-center bg-no-repeat"
+        className="hidden w-full h-[100dvh] absolute top-0 left-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: 'url("/parallax-dark/updated-parallax.jpg")' }}
-      />
+      >
+        <div className='absolute top-[40vh] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-2 text-start'>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className={`${Bebas_Neue_Font.className} text-white text-[15vw] font-bold leading-[1]`}
+          >
+            Solving problems with <span className="text-outline">precision</span>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className={`${Bebas_Neue_Font.className} text-white text-[15vw] font-bold leading-[1] mt-10`}
+          >
+            <span className="text-outline">passion</span>, and a touch of
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className={`${styles.animatedGradient} ${Lobster_Font.className} text-[#3B82F6] text-[12vw] font-bold mt-5`}
+          >
+            Creativity
+          </motion.div>
+        </div>
+      </div>
       <div 
         ref={portfolioWrapperRef}
         id="portfolio-wrapper" 
@@ -209,13 +237,13 @@ const Home = () => {
         {/* First line text */}
         <div 
           id="main-text"
-          className="absolute top-[3%] left-[45%] w-3/4 -translate-x-1/2 z-[1] text-right uppercase will-change-transform"
+          className="absolute top-[6%] lg:top-[3%] left-[45%] w-3/4 -translate-x-1/2 z-[1] text-right uppercase will-change-transform leading-[1] lg:leading-none"
         >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className={`${Bebas_Neue_Font.className} text-white text-[6vw] font-bold`}
+            className={`${Bebas_Neue_Font.className} text-white text-[10vw] lg:text-[6vw] font-bold`}
           >
             Solving problems with <span className="text-outline">precision</span>
           </motion.div>
@@ -224,28 +252,28 @@ const Home = () => {
         {/* Second line text - adjusted z-index */}
         <div 
           id="second-text"
-          className="absolute top-[20%] left-[45%] w-3/4 -translate-x-1/2 z-[3] text-right uppercase will-change-transform"
+          className="absolute top-[30%] lg:top-[20%] left-[57%] lg:left-[45%] w-1/2 lg:w-3/4 -translate-x-1/2 z-[3] text-right uppercase will-change-transform leading-[1] lg:leading-none"
         >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className={`${Bebas_Neue_Font.className} text-white text-[5vw] mt-4 font-bold`}
+            className={`${Bebas_Neue_Font.className} text-white text-[10vw] lg:text-[5vw] mt-4 font-bold`}
           >
             <span className="text-outline">passion</span>, and a touch of
           </motion.div>
         </div>
 
         {/* Creativity text - adjusted z-index and position */}
-        <div 
+        <div
           id="creativity-text"
-          className="absolute top-[36%] left-[40%] w-3/4 -translate-x-1/2 z-[8] text-right will-change-transform"
+          className="absolute top-[54%] lg:top-[36%] left-[40%] w-3/4 -translate-x-1/2 z-[8] text-right will-change-transform"
         >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className={`${Lobster_Font.className} text-[#3B82F6] text-[4vw] font-bold`}
+            className={`${styles.animatedGradient} ${Lobster_Font.className} text-[8vw] lg:text-[4vw] font-bold`}
           >
             Creativity
           </motion.div>

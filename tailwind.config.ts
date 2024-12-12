@@ -18,6 +18,15 @@ const config: Config = {
         background: 'rgb(41, 41, 41)',
         'text-muted': 'rgb(153, 153, 153)',
       },
+      animation: {
+        'gradient': 'gradient 5s ease-in-out infinite',
+      },
+      keyframes: {
+        gradient: {
+          '0%, 100%': { opacity: '0.5' },
+          '50%': { opacity: '0.8' },
+        },
+      },
       fontSize: {
         '4xl': '3.5rem', // 56px for nav items
         'xs': '0.75rem', // 12px for footer
