@@ -52,7 +52,7 @@ const Contacts = () => {
                 <h1 className={`${Bebas_Neue_Font.className} text-[12vw] leading-[15rem] uppercase w-full font-bold text-white absolute top-0 left-4 md:left-16 lg:left-24 opacity-30`}>
                     Let&apos;s Work
                     <br />
-                    <span className='text-outline'>Together</span>
+                    <span className='text-outline-thick'>Together</span>
                     <motion.div className="inline-flex">
                         {[0, 1, 2].map((index) => (
                         <motion.span

@@ -1,27 +1,57 @@
+/* Option 1: Holographic effect with rainbow reflection */
+/* .animatedGradient {
+  background: linear-gradient(
+      240deg,
+      #4B6BFD,
+      #8B9FF2,
+      #2B4397,
+      #6B7DDB,
+      #4B6BFD
+  );
+  background-size: 300% 300%;
+  animation: gradientFlow 9s ease-in-out infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 
+      0 0 10px rgba(75, 107, 253, 0.5),
+      2px 2px 4px rgba(139, 159, 242, 0.3),
+      -2px -2px 4px rgba(43, 67, 151, 0.3);
+  filter: drop-shadow(0 0 2px rgba(107, 125, 219, 0.2));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  transform: translate3d(0,0,0);
+  backface-visibility: hidden;
+  perspective: 1000;
+  will-change: background-position;
+} */
+
+/* Option 2: Metallic shine effect */
 .animatedGradient {
     background: linear-gradient(
-        90deg,
-        #3b82f6, /* Blue */
-        #60a5fa, /* Light blue */
-        #00fafa, /* Mint green */
-        #64fff7, /* Soft green */
-        #44bdff, /* Sky blue */
-        #dbeafe  /* Pale blue */
+        300deg,
+        #3B82F6,
+        #EC4899,
+        #8B5CF6,
+        #10B981,
+        #3B82F6
     );
     background-size: 300% 300%;
+    animation: gradientFlow 8s ease infinite;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientMove 5s ease-in-out infinite;
-  }
-  
-  @keyframes gradientMove {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
+    background-clip: text;
+    color: transparent;
+    text-shadow: 
+        0 0 1px rgba(255, 255, 255, 0.5),
+        0 0 15px rgba(59, 130, 246, 0.5),
+        0 0 40px rgba(59, 130, 246, 0.3);
+    filter: brightness(1) contrast(1.2);
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}

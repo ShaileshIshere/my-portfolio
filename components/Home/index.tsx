@@ -23,164 +23,172 @@ const Home = () => {
   const portfolioWrapperRef = useRef<HTMLDivElement>(null);
   const lenisRef = useRef<Lenis | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [isBrowser, setIsBrowser] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    setIsBrowser(true);
     
     const timer = setTimeout(() => {
-      gsap.registerPlugin(ScrollTrigger);
-      
-      lenisRef.current = new Lenis({
-        smoothWheel: true,
-        wheelMultiplier: 0.8,
-        lerp: 0.1,
-        syncTouch: true
-      });
-
-      const preloadImages = () => {
-        if (portfolioWrapperRef.current) {
-          const portfolioBG = portfolioWrapperRef.current.querySelectorAll('div[id*="portfolio-bg-"]');
-          const imageCache = new Map();
-          
-          portfolioBG.forEach(bg => {
-            const url = window.getComputedStyle(bg).backgroundImage.slice(5, -2);
-            if (!imageCache.has(url)) {
-              const img = new Image();
-              img.src = url;
-              imageCache.set(url, img);
-            }
-          });
-        }
-      };
-
-      window.addEventListener('load', preloadImages);
-
-      lenisRef.current.on('scroll', ScrollTrigger.update);
-
-      gsap.ticker.add((time) => {
-        lenisRef.current?.raf(time * 1000);
-      });
-
-      gsap.ticker.lagSmoothing(0);
-
-      if (portfolioWrapperRef.current) {
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: portfolioWrapperRef.current,
-            start: 'top top',
-            end: '+=150%',
-            scrub: 0.5,
-            pin: true,
-            pinSpacing: false,
-            fastScrollEnd: true,
-            preventOverlaps: true
-          }
+      if (typeof window !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+        
+        lenisRef.current = new Lenis({
+          smoothWheel: true,
+          wheelMultiplier: 0.8,
+          lerp: 0.1,
+          syncTouch: true
         });
 
-        // First parallax layer
-        const bg1 = document.querySelector('#portfolio-bg-1');
-        if (bg1) {
-          tl.to(bg1, {
-            y: -15 * parseFloat(bg1.getAttribute('data-speed') || '0'),
-            duration: 1,
-            force3D: true,
-            ease: "none"
-          }, 0);
-        }
+        const preloadImages = () => {
+          if (portfolioWrapperRef.current) {
+            const portfolioBG = portfolioWrapperRef.current.querySelectorAll('div[id*="portfolio-bg-"]');
+            const imageCache = new Map();
+            
+            portfolioBG.forEach(bg => {
+              const url = window.getComputedStyle(bg).backgroundImage.slice(5, -2);
+              if (!imageCache.has(url)) {
+                const img = new Image();
+                img.src = url;
+                imageCache.set(url, img);
+              }
+            });
+          }
+        };
 
-        // First line text - fastest scroll speed
-        const mainText = document.querySelector('#main-text');
-        if (mainText) {
-          tl.to(mainText, {
-            y: 250,  // Moves down faster
-            duration: 1,
-            force3D: true,
-            ease: "none"
-          }, 0);
-        }
+        window.addEventListener('load', preloadImages);
 
-        // Second line text - medium scroll speed
-        const secondText = document.querySelector('#second-text');
-        if (secondText) {
-          tl.to(secondText, {
-            y: 150,  // Moves down medium speed
-            duration: 1,
-            force3D: true,
-            ease: "none"
-          }, 0);
-        }
+        lenisRef.current.on('scroll', ScrollTrigger.update);
 
-        // Creativity text - slowest scroll speed
-        const creativityText = document.querySelector('#creativity-text');
-        if (creativityText) {
-          tl.to(creativityText, {
-            y: 50,  // Moves down slowest
-            duration: 1,
-            force3D: true,
-            ease: "none"
-          }, 0);
-        }
+        gsap.ticker.add((time) => {
+          lenisRef.current?.raf(time * 1000);
+        });
 
-        // Background layers (2-4)
-        for(let i = 2; i <= 4; i++) {
-          const bg = document.querySelector(`#portfolio-bg-${i}`);
-          if (bg) {
-            tl.to(bg, {
-              y: -15 * parseFloat(bg.getAttribute('data-speed') || '0'),
+        gsap.ticker.lagSmoothing(0);
+
+        if (portfolioWrapperRef.current) {
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: portfolioWrapperRef.current,
+              start: 'top top',
+              end: '+=150%',
+              scrub: 0.5,
+              pin: true,
+              pinSpacing: false,
+              fastScrollEnd: true,
+              preventOverlaps: true
+            }
+          });
+
+          // First parallax layer
+          const bg1 = document.querySelector('#portfolio-bg-1');
+          if (bg1) {
+            tl.to(bg1, {
+              y: -15 * parseFloat(bg1.getAttribute('data-speed') || '0'),
               duration: 1,
               force3D: true,
               ease: "none"
             }, 0);
           }
-        }
 
-        // Middle layers (5-7)
-        for(let i = 5; i <= 7; i++) {
-          const bg = document.querySelector(`#portfolio-bg-${i}`);
-          if (bg) {
-            tl.to(bg, {
-              y: -35 * parseFloat(bg.getAttribute('data-speed') || '0'),
+          // First line text - fastest scroll speed
+          const mainText = document.querySelector('#main-text');
+          if (mainText) {
+            tl.to(mainText, {
+              y: 250,  // Moves down faster
               duration: 1,
               force3D: true,
               ease: "none"
             }, 0);
           }
-        }
 
-        // Foreground layers (8-9)
-        for(let i = 8; i <= 9; i++) {
-          const bg = document.querySelector(`#portfolio-bg-${i}`);
-          if (bg) {
-            tl.to(bg, {
-              y: -50 * parseFloat(bg.getAttribute('data-speed') || '0'),
+          // Second line text - medium scroll speed
+          const secondText = document.querySelector('#second-text');
+          if (secondText) {
+            tl.to(secondText, {
+              y: 150,  // Moves down medium speed
               duration: 1,
               force3D: true,
               ease: "none"
             }, 0);
           }
+
+          // Creativity text - slowest scroll speed
+          const creativityText = document.querySelector('#creativity-text');
+          if (creativityText) {
+            tl.to(creativityText, {
+              y: 50,  // Moves down slowest
+              duration: 1,
+              force3D: true,
+              ease: "none"
+            }, 0);
+          }
+
+          // Background layers (2-4)
+          for(let i = 2; i <= 4; i++) {
+            const bg = document.querySelector(`#portfolio-bg-${i}`);
+            if (bg) {
+              tl.to(bg, {
+                y: -15 * parseFloat(bg.getAttribute('data-speed') || '0'),
+                duration: 1,
+                force3D: true,
+                ease: "none"
+              }, 0);
+            }
+          }
+
+          // Middle layers (5-7)
+          for(let i = 5; i <= 7; i++) {
+            const bg = document.querySelector(`#portfolio-bg-${i}`);
+            if (bg) {
+              tl.to(bg, {
+                y: -35 * parseFloat(bg.getAttribute('data-speed') || '0'),
+                duration: 1,
+                force3D: true,
+                ease: "none"
+              }, 0);
+            }
+          }
+
+          // Foreground layers (8-9)
+          for(let i = 8; i <= 9; i++) {
+            const bg = document.querySelector(`#portfolio-bg-${i}`);
+            if (bg) {
+              tl.to(bg, {
+                y: -50 * parseFloat(bg.getAttribute('data-speed') || '0'),
+                duration: 1,
+                force3D: true,
+                ease: "none"
+              }, 0);
+            }
+          }
         }
+
+        const handleResize = () => {
+          ScrollTrigger.refresh();
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+          window.removeEventListener('resize', handleResize);
+          window.removeEventListener('load', preloadImages);
+        };
       }
-
-      const handleResize = () => {
-        ScrollTrigger.refresh();
-      };
-
-      window.addEventListener('resize', handleResize);
-
-      return () => {
-        window.removeEventListener('resize', handleResize);
-        window.removeEventListener('load', preloadImages);
-      };
     }, 0);
 
     return () => {
       clearTimeout(timer);
-      lenisRef.current?.destroy();
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+      }
+      if (typeof window !== 'undefined') {
+        ScrollTrigger.getAll().forEach(t => t.kill());
+      }
     };
   }, []);
 
-  if (!mounted) {
+  if (!mounted || !isBrowser) {
     return null;
   }
 
@@ -198,7 +206,7 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className={`${Bebas_Neue_Font.className} text-white text-[15vw] font-bold leading-[1]`}
           >
-            Solving problems with <span className="text-outline">precision</span>
+            Solving problems with <span className="text-outline-thin">precision</span>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -206,7 +214,7 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className={`${Bebas_Neue_Font.className} text-white text-[15vw] font-bold leading-[1] mt-10`}
           >
-            <span className="text-outline">passion</span>, and a touch of
+            <span className="text-outline-thin">passion</span>, and a touch of
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -245,7 +253,7 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className={`${Bebas_Neue_Font.className} text-white text-[10vw] lg:text-[6vw] font-bold`}
           >
-            Solving problems with <span className="text-outline">precision</span>
+            Solving problems with <span className="text-outline-thin">precision</span>
           </motion.div>
         </div>
 
@@ -260,7 +268,7 @@ const Home = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className={`${Bebas_Neue_Font.className} text-white text-[10vw] lg:text-[5vw] mt-4 font-bold`}
           >
-            <span className="text-outline">passion</span>, and a touch of
+            <span className="text-outline-thin">passion</span>, and a touch of
           </motion.div>
         </div>
 
