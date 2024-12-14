@@ -66,7 +66,7 @@ export default function Nav({ isOpen, onClose }: NavProps) {
           initial="initial"
           animate="enter"
           exit="exit"
-          className="fixed right-0 top-0 h-screen w-[30%] min-w-[300px] bg-[#000D1B] text-white z-40"
+          className="fixed right-0 top-0 h-screen w-full md:w-[30%] md:min-w-[300px] bg-[#000D1B] text-white z-40"
           onClick={(e) => {
             if (e.target === e.currentTarget) {
               onClose();
@@ -74,10 +74,12 @@ export default function Nav({ isOpen, onClose }: NavProps) {
           }}
         >
           <Curve />
-          <div className="box-border h-full p-28 flex flex-col justify-between">
+          <div className="box-border h-full p-14 md:p-28 flex flex-col justify-between">
             <div>
-              <div className="text-[0.875rem] tracking-widest uppercase text-[#999999] mb-10 pb-5 border-b-[1px] border-gray-400 w-full">Navigation</div>
-              <div className="flex flex-col gap-5">
+              <div className="text-[0.75rem] md:text-[0.875rem] tracking-widest uppercase text-[#999999] mb-6 md:mb-10 pb-3 md:pb-5 border-b-[1px] border-gray-400 w-full">
+                Navigation
+              </div>
+              <div className="flex flex-col gap-3 md:gap-5">
                 {navItems.map((item, index) => (
                   <NavLink 
                     key={item.href} 
@@ -90,8 +92,10 @@ export default function Nav({ isOpen, onClose }: NavProps) {
             </div>
             
             <div>
-              <div className="text-[0.875rem] tracking-widest uppercase text-[#999999] mb-8">Socials</div>
-              <div className="flex gap-10">
+              <div className="text-[0.875rem] tracking-widest uppercase text-[#999999] mb-4 md:mb-8">
+                Socials
+              </div>
+              <div className="flex flex-col md:flex-row gap-4 md:gap-10">
                 {Object.entries(socialLinks).map(([link, href]) => (
                   <MagneticLink 
                     key={link} 

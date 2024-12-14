@@ -87,7 +87,8 @@ export default function NavLink({ data, isActive, isMenuOpen }: NavLinkProps) {
               href={href}
               onClick={handleClick}
               className={`
-                relative block text-[#999999] text-[3.5rem]
+                relative block text-[#999999] 
+                text-[3.5rem]
                 transition-colors duration-300
                 group-hover:text-white
                 ${isActive ? 'text-white' : ''}
@@ -103,7 +104,7 @@ export default function NavLink({ data, isActive, isMenuOpen }: NavLinkProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute left-[-3rem] top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-white"
+              className="absolute left-[-1.5rem] md:left-[-3rem] top-1/2 -translate-y-1/2 w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-white"
               transition={{
                 type: "spring",
                 stiffness: 350,
