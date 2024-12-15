@@ -3,7 +3,7 @@ import Modal from '@/components/ProjectsGalary/Modal';
 import Project from '@/components/ProjectsGalary/Project';
 import Image from 'next/image';
 import { Playwrite_DK_Loopet, Poiret_One, Sulphur_Point } from 'next/font/google'
-// import styles from './styles.module.css'
+import styles from './styles.module.css'
 import { useScroll, useTransform, motion } from 'framer-motion';
 
 const Playwrite_DK_Loopet_Font = Playwrite_DK_Loopet({
@@ -77,7 +77,7 @@ const ProjectsGalary = () => {
           </h2>
 
           {/* Desktop View (hidden on mobile/tablet) */}
-          <div className="hidden lg:flex w-[70%] flex-col items-center justify-center mt-44">
+          <div className={`${styles.noCursor} projects-gallery hidden lg:flex w-[70%] flex-col items-center justify-center mt-44`}>
             {projects.map((project, index) => (
               <Project 
                 key={index} 

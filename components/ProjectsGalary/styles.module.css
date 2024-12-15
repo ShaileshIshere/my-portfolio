@@ -2,10 +2,6 @@
     cursor: none !important;
 }
 
-.noCursor * {
-    cursor: none !important;
-}
-
 @media (max-width: 768px) {
     .noCursor {
       cursor: auto;
