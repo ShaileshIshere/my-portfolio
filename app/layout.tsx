@@ -5,6 +5,8 @@ import Header from "@/components/BurgerMenu/Header";
 import ScrollProgress from '@/components/Enhancements/ScrollProgress'
 import CursorTrail from '@/components/Enhancements/CursorTrail'
 import CustomCursor from '@/components/Enhancements/CustomCursor';
+// import CreativeCursor from "@/components/Enhancements/CreativeCursor";
+// import BlobCursor from "@/components/Enhancements/BlobCursor";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,6 +39,8 @@ export default function RootLayout({
         <ScrollProgress />
         <CursorTrail />
         <CustomCursor />
+        {/* <CreativeCursor /> */}
+        {/* <BlobCursor /> */}
         <Header />
         <main>
           {children}

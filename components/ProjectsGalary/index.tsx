@@ -72,7 +72,7 @@ const ProjectsGalary = () => {
     <>
       <section ref={container} id='work' className="flex h-[120vh] items-center justify-center">
         <div className="w-full flex flex-col items-center">
-          <h2 className={`${Playwrite_DK_Loopet_Font.className} text-2xl text-white mt-[3vh] md:-mt-[18vh] self-start pl-[15vw] cursor-pointer`}>
+          <h2 className={`${Playwrite_DK_Loopet_Font.className} text-2xl text-white mt-[3vh] md:-mt-[2%] self-start pl-[15vw] cursor-pointer`}>
             Some Of My Works
           </h2>
 
@@ -117,7 +117,7 @@ const ProjectsGalary = () => {
       </section>
       
       {/* Curved div structure (visible only on desktop) */}
-      <div className="w-full bg-black" style={{ height: '500px', marginTop: '-50px' }}>
+      <div className="w-full bg-black" style={{ height: 'calc(120vh - 500px)', marginTop: '-50px' }}>
         <motion.div style={{height}} className="relative w-full">
           <div 
             className="absolute w-[120%] -left-[10%] origin-top z-10"
