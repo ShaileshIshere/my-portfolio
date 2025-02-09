@@ -15,18 +15,21 @@ const Sulphur_Point_Font = Sulphur_Point({
 
 // Define props type
 interface ProjectProps {
+  id: string;
   index: number;
   title: string;
   description: string;
   setModal: React.Dispatch<React.SetStateAction<{active: boolean, index: number}>>;
+  onClick: () => void;
 }
 
-export default function Project({ index, title, description, setModal }: ProjectProps) {
+export default function Project({ id, index, title, description, setModal, onClick }: ProjectProps) {
   return (
     <div 
+      onClick={onClick}
+      className="w-full flex justify-between items-center px-[100px] py-[50px] border-t border-gray-300 cursor-pointer transition-all duration-200 hover:opacity-50 group"
       onMouseEnter={() => setModal({active: true, index})}
       onMouseLeave={() => setModal({active: false, index})}
-      className="w-full flex justify-between items-center px-[100px] py-[50px] border-t border-gray-300 cursor-pointer transition-all duration-200 hover:opacity-50 group"
     >
       <h2 className={`${Poiret_One_Font.className} text-6xl text-white m-0 font-normal transition-all duration-400 group-hover:translate-x-[-10px]`}>
         {title}

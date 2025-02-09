@@ -1,0 +1,113 @@
+.project-carousel-slide .slick-slide {
+  opacity: 0;
+  transform: scale(1.08) translateY(-10px);
+  filter: blur(2px);
+  transition: all 800ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-carousel-slide .slick-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  filter: blur(0);
+}
+
+.slide-wrapper {
+  position: relative;
+  transition: all 800ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Handle cloned slides */
+.project-carousel-slide .slick-slide.slick-cloned {
+  transition: all 800ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.carousel-container {
+  margin: 0 auto;
+  position: relative;
+}
+
+.slick-dots {
+  bottom: -30px;
+}
+
+.slick-dots li button:before {
+  color: white;
+  opacity: 0.5;
+  font-size: 8px;
+}
+
+.slick-dots li.slick-active button:before {
+  color: white;
+  opacity: 1;
+}
+
+.carousel-outer {
+  padding: 0 80px;
+}
+
+/* Additional fixes for smooth transitions */
+.slick-slider {
+  position: relative;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.slick-list {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.slick-track {
+  position: relative;
+  left: 0;
+  top: 0;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ensure smooth transitions during slide changes */
+.slick-slide > div {
+  display: flex;
+}
+
+/* Enhanced transition effects */
+.slick-slide {
+  opacity: 0 !important;
+  transform: scale(1.08) translateY(-10px) !important;
+  filter: blur(2px) !important;
+  transition: all 800ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+  will-change: transform, opacity, filter;
+}
+
+.slick-active {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+  filter: blur(0) !important;
+}
+
+.slick-current {
+  z-index: 2;
+}
+
+/* Add subtle zoom effect during transition */
+.transitioning .slide-wrapper {
+  transform: scale(1.02);
+}
+
+/* Optimize performance */
+.slide-wrapper {
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Ensure hardware acceleration */
+.slick-slide {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}

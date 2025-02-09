@@ -17,13 +17,17 @@
     "next": "^15.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "sass": "^1.82.0"
+    "react-slick": "^0.30.3",
+    "sass": "^1.82.0",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^11.2.2"
   },
   "devDependencies": {
     "@types/gsap": "^3.0.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-slick": "^0.23.13",
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
     "postcss": "^8",
