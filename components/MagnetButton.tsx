@@ -38,30 +38,47 @@ const MagnetButton = ({
     const buttonRef = useRef<HTMLButtonElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
 
-    const activateMagneto = (event: MouseEvent) => {
+    useEffect(() => {
         const magneto = buttonRef.current;
-        const magnetoContent = contentRef.current;
-        const boundBox = magneto?.getBoundingClientRect();
         
-        if (!boundBox || !magneto || !magnetoContent) return;
-        
-        const newX = ((event.clientX - boundBox.left)/(magneto?.offsetWidth || 1)) - 0.5;
-        const newY = ((event.clientY - boundBox.top)/(magneto?.offsetHeight || 1)) - 0.5;
+        const activateMagneto = (event: MouseEvent) => {
+            const magnetoContent = contentRef.current;
+            const boundBox = magneto?.getBoundingClientRect();
+            
+            if (!boundBox || !magneto || !magnetoContent) return;
+            
+            const newX = ((event.clientX - boundBox.left)/(magneto?.offsetWidth || 1)) - 0.5;
+            const newY = ((event.clientY - boundBox.top)/(magneto?.offsetHeight || 1)) - 0.5;
 
-        gsap.to(magneto, {
-            duration: 1, 
-            x: newX * magneticStrength,
-            y: newY * magneticStrength,
-            ease: "power4.easeOut"
-        });
+            gsap.to(magneto, {
+                duration: 1, 
+                x: newX * magneticStrength,
+                y: newY * magneticStrength,
+                ease: "power4.easeOut"
+            });
 
-        gsap.to(magnetoContent, {
-            duration: 1, 
-            x: newX * magneticContentStrength,
-            y: newY * magneticContentStrength,
-            ease: "power4.easeOut"
-        });
-    };
+            gsap.to(magnetoContent, {
+                duration: 1, 
+                x: newX * magneticContentStrength,
+                y: newY * magneticContentStrength,
+                ease: "power4.easeOut"
+            });
+        };
+
+        const handleMouseMove = (e: MouseEvent) => {
+            if (e.target === magneto || magneto?.contains(e.target as Node)) {
+                activateMagneto(e);
+            }
+        };
+
+        magneto?.addEventListener('mousemove', handleMouseMove);
+        magneto?.addEventListener('mouseleave', resetMagneto);
+
+        return () => {
+            magneto?.removeEventListener('mousemove', handleMouseMove);
+            magneto?.removeEventListener('mouseleave', resetMagneto);
+        };
+    }, [magneticStrength, magneticContentStrength]);
 
     const resetMagneto = () => {
         const magneto = buttonRef.current;
@@ -83,24 +100,6 @@ const MagnetButton = ({
             ease: "elastic.out(1, 0.3)"
         });
     };
-
-    useEffect(() => {
-        const magneto = buttonRef.current;
-        
-        const handleMouseMove = (e: MouseEvent) => {
-            if (e.target === magneto || magneto?.contains(e.target as Node)) {
-                activateMagneto(e);
-            }
-        };
-
-        magneto?.addEventListener('mousemove', handleMouseMove);
-        magneto?.addEventListener('mouseleave', resetMagneto);
-
-        return () => {
-            magneto?.removeEventListener('mousemove', handleMouseMove);
-            magneto?.removeEventListener('mouseleave', resetMagneto);
-        };
-    }, [magneticStrength, magneticContentStrength]);
 
     return(
         <button 

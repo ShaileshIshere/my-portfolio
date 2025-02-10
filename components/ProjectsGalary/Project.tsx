@@ -23,7 +23,7 @@ interface ProjectProps {
   onClick: () => void;
 }
 
-export default function Project({ id, index, title, description, setModal, onClick }: ProjectProps) {
+export default function Project({ index, title, description, setModal, onClick }: ProjectProps) {
   return (
     <div 
       onClick={onClick}

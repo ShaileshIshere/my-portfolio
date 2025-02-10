@@ -61,28 +61,39 @@ const ProjectCarousel = ({ images, title }: ProjectCarouselProps) => {
     );
 };
 
-const PrevArrow = ({ onClick }: any) => (
-    <button
-        onClick={onClick}
-        className="absolute left-[-80px] top-1/2 -translate-y-1/2 z-10 p-4 text-white/70 hover:text-white transition-all duration-300"
-        aria-label="Previous slide"
-    >
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M15 19l-7-7 7-7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-    </button>
-);
+// Add custom type for arrow props
+interface ArrowProps {
+  onClick?: () => void;
+}
 
-const NextArrow = ({ onClick }: any) => (
+const PrevArrow = ({ onClick }: ArrowProps) => {
+  return (
     <button
-        onClick={onClick}
-        className="absolute right-[-80px] top-1/2 -translate-y-1/2 z-10 p-4 text-white/70 hover:text-white transition-all duration-300"
-        aria-label="Next slide"
+      type="button"
+      onClick={onClick}
+      className="absolute left-[-80px] top-1/2 -translate-y-1/2 z-20 p-4 text-white/70 hover:text-white transition-all duration-300 cursor-pointer"
+      aria-label="Previous slide"
     >
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M9 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M15 19l-7-7 7-7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
     </button>
-);
+  );
+};
+
+const NextArrow = ({ onClick }: ArrowProps) => {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="absolute right-[-80px] top-1/2 -translate-y-1/2 z-20 p-4 text-white/70 hover:text-white transition-all duration-300 cursor-pointer"
+      aria-label="Next slide"
+    >
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path d="M9 5l7 7-7 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </button>
+  );
+};
 
 export default ProjectCarousel;
