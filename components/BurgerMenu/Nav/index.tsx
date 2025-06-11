@@ -95,7 +95,7 @@ export default function Nav({ isOpen, onClose }: NavProps) {
               <div className="text-[0.875rem] tracking-widest uppercase text-[#999999] mb-4 md:mb-8">
                 Socials
               </div>
-              <div className="flex flex-col md:flex-row gap-4 md:gap-10">
+              <div className="flex flex-col md:flex-row gap-4 md:gap-10 whitespace-nowrap">
                 {Object.entries(socialLinks).map(([link, href]) => (
                   <MagneticLink 
                     key={link} 

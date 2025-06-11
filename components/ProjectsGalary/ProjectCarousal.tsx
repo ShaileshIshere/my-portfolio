@@ -18,7 +18,7 @@ const ProjectCarousel = ({ images, title }: ProjectCarouselProps) => {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 3000,
-        cssEase: "cubic-bezier(0.87, 0, 0.13, 1);",
+        cssEase: "cubic-bezier(0.87, 0, 0.13, 1)",
         prevArrow: <PrevArrow />,
         nextArrow: <NextArrow />,
         className: "project-carousel-slide",
@@ -42,19 +42,19 @@ const ProjectCarousel = ({ images, title }: ProjectCarouselProps) => {
         <div className="carousel-outer w-full max-w-5xl mx-auto">
             <div className="carousel-container relative">
                 <Slider {...settings}>
-                {images.map((image, index) => (
-                    <div key={index} className="slide-wrapper">
-                        <div className="w-full relative rounded-lg overflow-hidden" style={{ paddingBottom: '56.25%' }}>
-                            <Image
-                                src={`/project-galary/${image}`}
-                                fill
-                                alt={`${title} - Image ${index + 1}`}
-                                className="absolute top-0 left-0 w-full h-full object-cover"
-                                priority
-                            />
-                        </div>
-                    </div>
-                ))}
+                  {images.map((image, index) => (
+                      <div key={index} className="slide-wrapper">
+                          <div className="w-full relative rounded-lg overflow-hidden" style={{ paddingBottom: '55.25%' }}>
+                              <Image
+                                  src={`/project-galary/${image}`}
+                                  fill
+                                  alt={`${title} - Image ${index + 1}`}
+                                  className="absolute top-0 left-0 w-full h-full object-cover"
+                                  priority
+                              />
+                          </div>
+                      </div>
+                  ))}
                 </Slider>
             </div>
         </div>

@@ -46,8 +46,8 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: "chat-app",
-    title: "Chat App",
+    id: "MessageHub",
+    title: "MessageHub",
     description: "Real Time & Full Stack",
     longDescription: "A real-time chat application with user authentication, private messaging, group chats and file sharing capabilities built using modern web technologies.",
     src: "chat-app-image-1.png",
@@ -82,8 +82,8 @@ const projects: Project[] = [
     }
   },
   {
-    id: "medium-clone",
-    title: "Medium",
+    id: "Note Craft",
+    title: "Note Craft",
     description: "Blogs & News",
     longDescription: "A Medium-inspired blogging platform where users can publish articles, follow writers, and engage with content through comments and reactions.",
     src: "medium-blog-image-1.png",
@@ -371,7 +371,7 @@ const ProjectsGalary = () => {
       <div className="w-full bg-black" style={{ height: 'calc(120vh - 500px)', marginTop: '-50px' }}>
         <motion.div style={{height}} className="relative w-full">
           <div 
-            className="absolute w-[120%] -left-[10%] origin-top z-10"
+            className="absolute w-[150%] md:w-[130%] lg:w-[120%] -left-[30%] md:-left-[20%] lg:-left-[10%] origin-top z-10"
             style={{
               height: '100%',
               borderRadius: '0 0 50% 50%',

@@ -11,26 +11,32 @@ const Bebas_Neue_Font = Bebas_Neue({
 
 // Variation 5: Terminal Typewriter - One Line
 export function TerminalTypewriter() {
+  const commands = ["echo", "print", "say"]
+  const [currentCommand, setCurrentCommand] = useState(commands[0]) // Use a consistent initial value
   const [displayText, setDisplayText] = useState("")
   const [showPrompt, setShowPrompt] = useState(true)
   const fullText = "Let's Work Together"
-  const commands = ["echo", "print", "say"]
-  const [currentCommand] = useState(commands[Math.floor(Math.random() * commands.length)])
 
   useEffect(() => {
-    // First show the command
-    setTimeout(() => {
+    // Set the random command only on the client side to avoid hydration mismatch
+    setCurrentCommand(commands[Math.floor(Math.random() * commands.length)])
+
+    const timer = setTimeout(() => {
       let i = 0
-      const timer = setInterval(() => {
-        if (i < fullText.length) {
-          setDisplayText(fullText.slice(0, i + 1))
+      const typing = setInterval(() => {
+        if (i <= fullText.length) {
+          setDisplayText(fullText.substring(0, i))
           i++
         } else {
-          clearInterval(timer)
+          clearInterval(typing)
           setShowPrompt(false)
         }
-      }, 80)
+      }, 100)
+
+      return () => clearInterval(typing)
     }, 1000)
+
+    return () => clearTimeout(timer)
   }, [])
 
   return (
@@ -40,7 +46,7 @@ export function TerminalTypewriter() {
           <div className="w-3 h-3 rounded-full bg-red-500"></div>
           <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
           <div className="w-3 h-3 rounded-full bg-green-500"></div>
-          <span className="text-green-400 text-sm font-mono ml-4">terminal</span>
+          <div className="flex-1 text-xs text-center text-white/50">Terminal</div>
         </div>
 
         <div className="font-mono text-left">
@@ -49,8 +55,8 @@ export function TerminalTypewriter() {
             <span className="text-white">:</span>
             <span className="text-purple-400">~</span>
             <span className="text-white">$ </span>
-            <span className="text-yellow-400">{currentCommand}</span>
-            <span className="text-white"> &quot;</span>
+            <span>{currentCommand} </span>
+            <span className="text-white">&quot;</span>
             <span className={`${Bebas_Neue_Font.className} text-white text-2xl md:text-4xl uppercase`}>
               {displayText}
             </span>

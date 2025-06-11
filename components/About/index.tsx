@@ -153,11 +153,11 @@ const About = () => {
               whileInView="visible"
               viewport={{ once: false, amount: 0.3 }}
             >
-              {[
+                {[
                 { number: "01", title: "Design", content: "With a solid track record in designing websites, I deliver strong and user-friendly digital designs. (Since 2024 only in combination with development)" },
                 { number: "02", title: "Development", content: "I build scalable websites from scratch that fit seamlessly with design. My focus is on micro animations, transitions and interaction. Building with React, Next.js, and modern web technologies." },
-                { number: "03", title: "The full package", content: "A complete website from concept to implementation, that's what makes me stand out. My great sense for design and my development skills enable me to create kick-ass projects." }
-              ].map((item, index) => (
+                { number: "03", title: "Learning & Growth", content: "As a passionate learner, I'm constantly exploring new technologies and best practices. I combine fresh perspectives with solid fundamentals to deliver complete solutions from concept to deployment." }
+                ].map((item, index) => (
                 <motion.div 
                   key={item.number}
                   className="flex flex-col"
@@ -167,29 +167,29 @@ const About = () => {
                 >
                   <span className="text-[#696969] mb-4 md:mb-6 text-lg md:text-xl">{item.number}</span>
                   <h3 className="text-[32px] md:text-[36px] lg:text-[40px] text-white mb-6 md:mb-8 font-light">
-                    {item.title === "The full package" && (
-                      <motion.span 
-                        className="inline-block mr-3"
-                        animate={{ 
-                          rotate: [0, 360],
-                          scale: [1, 1.2, 1]
-                        }}
-                        transition={{ 
-                          duration: 3,
-                          repeat: Infinity,
-                          ease: "linear"
-                        }}
-                      >
-                        ✦
-                      </motion.span>
-                    )}
-                    {item.title}
+                  {/* {item.title === "Learning & Growth" && (
+                  <motion.span 
+                  className="inline-block mr-3"
+                  animate={{ 
+                    rotate: [0, 360],
+                    scale: [1, 1.2, 1]
+                  }}
+                  transition={{ 
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
+                  >
+                  ✦
+                  </motion.span>
+                  )} */}
+                  {item.title}
                   </h3>
                   <p className="text-[#696969] text-lg md:text-xl leading-relaxed">
-                    {item.content}
+                  {item.content}
                   </p>
                 </motion.div>
-              ))}
+                ))}
             </motion.div>
           </div>
         </div>
