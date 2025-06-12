@@ -5,6 +5,28 @@ import MagnetButton from '@/components/MagnetButton';
 import { Poiret_One, Sulphur_Point } from 'next/font/google'
 import { useState, useEffect } from 'react';
 
+interface LenisInstance {
+  scrollTo: (
+    target: number | HTMLElement | null,
+    options?: {
+      duration?: number;
+      offset?: number;
+      immediate?: boolean;
+      easing?: (t: number) => number;
+      onComplete?: () => void;
+    }
+  ) => void;
+  destroy: () => void;
+  on: (event: string, callback: (...args: unknown[]) => void) => void;
+  raf?: (time: number) => void;
+}
+
+declare global {
+  interface Window {
+    lenis: LenisInstance | undefined;
+  }
+}
+
 const Poiret_One_Font = Poiret_One({
   weight: '400',
   subsets: ['latin'],
@@ -92,6 +114,33 @@ const About = () => {
                 width={windowWidth < 768 ? "12rem" : "18rem"}
                 height={windowWidth < 768 ? "12rem" : "18rem"}
                 className="bg-[#1f2937]"
+                onClick={() => {
+                  // Get document height and viewport height
+                  const docHeight = Math.max(
+                    document.body.scrollHeight,
+                    document.body.offsetHeight,
+                    document.documentElement.clientHeight,
+                    document.documentElement.scrollHeight,
+                    document.documentElement.offsetHeight
+                  );
+                  const windowHeight = window.innerHeight;
+                  
+                  // Calculate position to scroll to (bottom of page with small offset)
+                  const scrollToPosition = docHeight - windowHeight - 20;
+                  
+                  // Use Lenis if available, otherwise use native scrolling
+                  if (window.lenis) {
+                    window.lenis.scrollTo(scrollToPosition, {
+                      duration: 1.5,
+                      easing: (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t))
+                    });
+                  } else {
+                    window.scrollTo({
+                      top: scrollToPosition,
+                      behavior: 'smooth'
+                    });
+                  }
+                }}
               >
                 <span className="text-xl md:text-2xl font-medium text-gray-200">Get In Touch</span>
               </MagnetButton>

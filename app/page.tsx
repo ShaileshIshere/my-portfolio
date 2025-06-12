@@ -7,7 +7,7 @@ import Contacts from '@/components/Contacts';
 
 const Page = () => {
   return (
-    <main className="relative">
+    <main className="relative overflow-hidden">
       <Home />
       <About />
       <ProjectsGalary />

@@ -105,7 +105,7 @@ const MagnetButton = ({
         <button 
             ref={buttonRef}
             onClick={onClick}
-            className={`${position} rounded-${rounded} border-none cursor-pointer flex justify-center items-center z-10 ${className}`}
+            className={`${position} rounded-${rounded} border-none cursor-pointer flex justify-center items-center ${className}`}
             style={{
                 width,
                 height,

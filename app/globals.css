@@ -108,6 +108,23 @@ body {
   }
 }
 
+/* Ensure hamburger button is always visible
+.hamburger-button {
+  position: fixed !important;
+  z-index: 9997 !important;
+  pointer-events: auto !important;
+}
+
+/* Force hamburger button to be above everything on mobile */
+/* @media (max-width: 768px) {
+  .hamburger-button {
+    z-index: 9998 !important;
+    position: fixed !important;
+    top: 12px !important;
+    right: 12px !important;
+  }
+}  */
+
 /* .main{
   .header{
       display: flex;
