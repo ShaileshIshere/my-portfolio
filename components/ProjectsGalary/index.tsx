@@ -211,31 +211,220 @@ const ProjectsGalary = () => {
           </div>
 
           {/* Mobile/Tablet View (hidden on desktop) */}
-          <div className="lg:hidden w-full px-4 mt-8">
-            {projects.slice(0, 2).map((project, index) => (
-              <Link 
-                key={index}
-                href={`/typescript/projects/${project.id}`}
-                className="mb-12 block"
+          <div className="lg:hidden w-full px-4 mt-8 pb-16">
+            {/* Enhanced Mobile/Tablet View */}
+            <motion.div 
+              className="space-y-4"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.3
+                  }
+                }
+              }}
+            >
+              {projects.slice(0, 2).map((project, index) => (
+                <motion.div
+                  key={index}
+                  variants={{
+                    hidden: { opacity: 0, y: 50 },
+                    visible: { 
+                      opacity: 1, 
+                      y: 0,
+                      transition: {
+                        duration: 0.6,
+                        ease: "easeOut"
+                      }
+                    }
+                  }}
+                  className="group"
+                >
+                  {/* <Link 
+                    href={`/typescript/projects/${project.id}`}
+                    className="block"
+                  > */}
+                    {/* Project Card */}
+                    <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-gray-800 p-1 group-hover:scale-[1.02] transition-all duration-500 ease-out">
+                      <div className="relative bg-black rounded-lg overflow-hidden">
+                        
+                        {/* Project Image */}
+                        <div className="relative w-full aspect-[16/9] overflow-hidden">
+                          <Image
+                            src={`/project-galary/${project.src}`}
+                            fill
+                            alt={project.title}
+                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          />
+                          
+                          {/* Gradient overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
+                          
+                          {/* Tech badges overlay */}
+                          {/* <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+                            {project.technologies.frontend.split(',').slice(0, 2).map((tech, techIndex) => (
+                              <span 
+                                key={techIndex}
+                                className="px-2 py-1 text-xs bg-white/10 backdrop-blur-sm rounded-full text-white/90 border border-white/20"
+                              >
+                                {tech.trim()}
+                              </span>
+                            ))}
+                          </div> */}
+
+                          {/* External link indicator */}
+                          {/* <div className="absolute top-4 right-4 w-8 h-8 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20 group-hover:bg-white/20 transition-colors duration-300">
+                            <svg 
+                              className="w-4 h-4 text-white/80 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                            >
+                              <path 
+                                d="M7 17l9.2-9.2M17 17V8h-9" 
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </div> */}
+                        </div>
+
+                        {/* Project Info */}
+                        <div className="p-4">
+                          {/* Title and description */}
+                          <div className="mb-3">
+                            <div className="flex items-start justify-between mb-2">
+                              <h3 className={`${Poiret_One_Font.className} text-2xl md:text-3xl text-white font-medium group-hover:text-blue-400 transition-colors duration-300`}>
+                                {project.title}
+                              </h3>
+                              <span className="text-xs text-white/40 uppercase tracking-wider mt-2">
+                                0{index + 1}
+                              </span>
+                            </div>
+                            
+                            <p className={`${Sulphur_Point_Font.className} text-sm md:text-base text-white/60 mb-3 leading-relaxed`}>
+                              {project.description}
+                            </p>
+                            
+                            <p className={`${Sulphur_Point_Font.className} text-xs sm:text-sm text-white/80 leading-relaxed line-clamp-2 hidden sm:block`}>
+                              {project.longDescription}
+                            </p>
+                          </div>
+
+                          {/* Technology stack preview */}
+                          <div className="flex flex-wrap gap-1 mb-3">
+                            {[...project.technologies.frontend.split(','), ...project.technologies.backend.split(',')]
+                              .slice(0, 3)
+                              .map((tech, techIndex) => (
+                              <span 
+                                key={techIndex}
+                                className="px-2 py-1 text-xs bg-gray-800/50 rounded text-white/70 border border-gray-700/50"
+                              >
+                                {tech.trim()}
+                              </span>
+                            ))}
+                            {[...project.technologies.frontend.split(','), ...project.technologies.backend.split(',')].length > 4 && (
+                              <span className="px-2 py-1 text-xs text-white/50">
+                                +{[...project.technologies.frontend.split(','), ...project.technologies.backend.split(',')].length - 4} more
+                              </span>
+                            )}
+                          </div>
+
+                          {/* Action buttons */}
+                          <div className="flex gap-2">
+                            <Link 
+                              href={project.links.live}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="flex-1 bg-gradient-to-r from-blue-600 to-blue-500 rounded-lg p-3 group-hover:from-blue-500 group-hover:to-blue-400 transition-all duration-300"
+                            >
+                              <div className="flex items-center justify-center gap-2 text-white font-medium">
+                                <span className="text-sm">View Project</span>
+                                <svg 
+                                  className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                >
+                                  <path 
+                                    d="M5 12h14m-7-7l7 7-7 7" 
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  />
+                                </svg>
+                              </div>
+                            </Link>
+                            
+                            <Link 
+                              href={project.links.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="p-3 bg-gray-800/50 rounded-lg border border-gray-700/50 hover:bg-gray-700/50 transition-colors duration-300"
+                            >
+                              <svg 
+                                className="w-5 h-5 text-white/70"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                              >
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                              </svg>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {/* </Link> */}
+                </motion.div>
+              ))}
+
+              {/* View All Projects Button */}
+              {/* <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0,
+                    transition: {
+                      duration: 0.5,
+                      ease: "easeOut",
+                      delay: 0.6
+                    }
+                  }
+                }}
+                className="text-center pt-6"
               >
-                <div className="relative w-full aspect-[4/3] mb-4">
-                  <Image
-                    src={`/project-galary/${project.src}`}
-                    fill
-                    alt={project.title}
-                    className="object-cover rounded-lg"
-                  />
-                </div>
-                <div className="flex justify-between items-center px-2">
-                  <h3 className={`${Poiret_One_Font.className} text-2xl text-white mb-2`}>
-                    {project.title}
-                  </h3>
-                  <p className={`${Sulphur_Point_Font.className} text-sm text-white opacity-70`}>
-                    {project.description}
-                  </p>
-                </div>
-              </Link>
-            ))}
+                <Link 
+                  href="/projects"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-gray-800 to-gray-700 rounded-full text-white font-medium hover:from-gray-700 hover:to-gray-600 transition-all duration-300 group border border-gray-600/50"
+                >
+                  <span>View All Projects</span>
+                  <div className="w-6 h-6 bg-white/10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors duration-300">
+                    <svg 
+                      className="w-3 h-3 transform group-hover:translate-x-0.5 transition-transform duration-300"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <path 
+                        d="M5 12h14m-7-7l7 7-7 7" 
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </Link>
+              </motion.div> */}
+            </motion.div>
           </div>
         </div>
       </section>

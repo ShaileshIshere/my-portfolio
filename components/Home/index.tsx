@@ -78,13 +78,24 @@ const Home = () => {
           },
         })
 
+        // Calculate responsive speed based on screen width
+        const getResponsiveSpeed = (baseSpeed: number) => {
+          const width = window.innerWidth
+          if (width >= 1920) return baseSpeed * 1.3      // 4K/Large screens - more dramatic
+          if (width >= 1440) return baseSpeed * 1.1      // Large laptops - slightly more
+          if (width >= 1024) return baseSpeed * 1.0      // Standard laptops - base speed
+          if (width >= 768) return baseSpeed * 0.8       // Tablets - reduced speed
+          return baseSpeed * 0.6                         // Small screens - minimal movement
+        }
+
         // First parallax layer
         const bg1 = document.querySelector("#portfolio-bg-1")
         if (bg1) {
+          const baseSpeed = Number.parseFloat(bg1.getAttribute("data-speed") || "0")
           tl.to(
             bg1,
             {
-              y: -15 * Number.parseFloat(bg1.getAttribute("data-speed") || "0"),
+              y: -15 * getResponsiveSpeed(baseSpeed), // Moves down slower
               duration: 1,
               force3D: true,
               ease: "none",
@@ -99,7 +110,7 @@ const Home = () => {
           tl.to(
             mainText,
             {
-              y: 250, // Moves down faster
+              y: getResponsiveSpeed(250), // Moves down faster
               duration: 1,
               force3D: true,
               ease: "none",
@@ -114,7 +125,7 @@ const Home = () => {
           tl.to(
             secondText,
             {
-              y: 150, // Moves down medium speed
+              y: getResponsiveSpeed(150), // Moves down medium speed
               duration: 1,
               force3D: true,
               ease: "none",
@@ -129,7 +140,7 @@ const Home = () => {
           tl.to(
             creativityText,
             {
-              y: 50, // Moves down slowest
+              y: getResponsiveSpeed(50), // Moves down slowest
               duration: 1,
               force3D: true,
               ease: "none",
@@ -142,10 +153,11 @@ const Home = () => {
         for (let i = 2; i <= 4; i++) {
           const bg = document.querySelector(`#portfolio-bg-${i}`)
           if (bg) {
+            const baseSpeed = Number.parseFloat(bg.getAttribute("data-speed") || "0")
             tl.to(
               bg,
               {
-                y: -15 * Number.parseFloat(bg.getAttribute("data-speed") || "0"),
+                y: -15 * getResponsiveSpeed(baseSpeed),
                 duration: 1,
                 force3D: true,
                 ease: "none",
@@ -159,10 +171,11 @@ const Home = () => {
         for (let i = 5; i <= 7; i++) {
           const bg = document.querySelector(`#portfolio-bg-${i}`)
           if (bg) {
+            const baseSpeed = Number.parseFloat(bg.getAttribute("data-speed") || "0")
             tl.to(
               bg,
               {
-                y: -35 * Number.parseFloat(bg.getAttribute("data-speed") || "0"),
+                y: -35 * getResponsiveSpeed(baseSpeed),
                 duration: 1,
                 force3D: true,
                 ease: "none",
@@ -176,10 +189,11 @@ const Home = () => {
         for (let i = 8; i <= 9; i++) {
           const bg = document.querySelector(`#portfolio-bg-${i}`)
           if (bg) {
+            const baseSpeed = Number.parseFloat(bg.getAttribute("data-speed") || "0")
             tl.to(
               bg,
               {
-                y: -50 * Number.parseFloat(bg.getAttribute("data-speed") || "0"),
+                y: -50 * getResponsiveSpeed(baseSpeed),
                 duration: 1,
                 force3D: true,
                 ease: "none",
@@ -208,16 +222,14 @@ const Home = () => {
 
   return (
     <>
-      {/* Remove the entire loading screen JSX */}
-
       {/* Main content - always rendered */}
-      <section id="home" className="relative min-h-[100dvh] md:mb-[90vh]">
+      <section id="home" className="relative min-h-[100dvh] md:mb-[90dvh]">
         <div
           id="mobile-hero"
           className="hidden w-full h-[100dvh] absolute top-0 left-0 z-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: 'url("/parallax-dark/updated-parallax.jpg")' }}
         >
-          <div className="absolute top-[40vh] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-2 text-start">
+          <div className="absolute top-[40dvh] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-2 text-start">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -253,7 +265,7 @@ const Home = () => {
           <div
             id="portfolio-bg-1"
             data-speed="0.3"
-            className="absolute top-[-10vh] left-[-10%] z-[1] w-[120%] h-[120vh] 
+            className="absolute top-[-10dvh] left-[-10%] z-[1] w-[120%] h-[120dvh] 
               bg-cover bg-center bg-no-repeat
               will-change-transform translate-z-0 backface-hidden 
               transition-none overflow-hidden"
@@ -324,13 +336,13 @@ const Home = () => {
                 return speeds[num as keyof typeof speeds]
               })()}
               className={`
-                absolute top-[-10vh] left-[-10%] 
+                absolute top-[-10dvh] left-[-10%] 
                 ${num <= 4 ? "z-[2]" : num <= 7 ? "z-[7]" : "z-[8]"}
-                w-[120%] h-[120vh] 
+                w-[120%] h-[120dvh] 
                 bg-cover bg-center bg-no-repeat
                 will-change-transform translate-z-0 backface-hidden 
                 transition-none overflow-hidden
-                ${num === 9 ? "top-[25vh] scale-105 bg-contain !w-full !left-0" : ""}
+                ${num === 9 ? "top-[30dvh] scale-105 bg-contain !w-full !left-0" : ""}
               `}
               style={{ backgroundImage: `url('/parallax-dark/parallax${num - 1}.png')` }}
             />

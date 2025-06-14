@@ -93,18 +93,18 @@ const About = () => {
   return (
     <section id="about" className="relative z-[1]">
       <div className="
-        h-[200vh] relative
+        h-[clamp(100vh, 200dvh, 250dvh)] relative
         bg-gradient-to-b from-[#001731] from-0% via-[#001731] via-25% to-black to-65%
-        max-md:h-[100vh]
+        max-md:min-h-screen
       ">
         <div className='relative w-[90%] md:w-[80%] lg:w-[70%] mx-auto flex flex-col items-center'>
           <section className='w-full h-fit-content relative flex justify-center'>
-            <p className={`${Poiret_One_Font.className} text-[5vw] md:text-[4vw] lg:text-[3vw] text-white leading-[1.2] md:leading-[1] md:-mt-[10vh] text-center md:text-left`}>
+            <p className={`${Poiret_One_Font.className} text-[5vw] md:text-[4vw] lg:text-[3vw] text-white leading-[1.2] md:leading-[1] md:-mt-[10dvh] text-center md:text-left`}>
               I believe in coding with purpose and precision. Every project is an opportunity to push boundaries, solve problems, and create experiences that matter. With a passion for collaboration and continuous learning, I aim to stay ahead of the curve, delivering work that&apos;s not just cutting-edge but also meaningful to its users.
             </p>
           </section>
 
-          <div className="w-full relative mt-5 md:mt-20 border-b-[1px] border-gray-600 md:mb-[7vh]">
+          <div className="w-full relative mt-5 md:mt-20 border-b-[1px] border-gray-600 md:mb-[7dvh]">
             <p className="italic text-gray-400 ml-1">About me.</p>
           </div>
 
@@ -146,7 +146,7 @@ const About = () => {
               </MagnetButton>
             </div>
 
-            <motion.div className={`w-full lg:w-[60%] text-center text-white text-[4vw] md:text-[2.5vw] lg:text-[1.5vw] lg:text-left leading-[1.6] lg:leading-[4vh] ${Sulphur_Point_Font.className}`}>
+            <motion.div className={`w-full lg:w-[60%] text-center text-white text-[4vw] md:text-[2.5vw] lg:text-[1.5vw] lg:text-left leading-[1.6] lg:leading-[4dvh] ${Sulphur_Point_Font.className}`}>
               <motion.p
                 initial={{ opacity: 0, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -167,7 +167,7 @@ const About = () => {
 
           <div className="hidden lg:block w-full relative mt-32 md:mt-52 mb-20 md:mb-40">
             <motion.h2 
-              className={`text-[36px] md:text-[48px] lg:text-[64px] text-white mb-16 md:mb-32 font-light ${Poiret_One_Font.className} text-center lg:text-left`}
+              className={`text-[36px] md:text-[48px] lg:text-[3.3vw] text-white mb-16 md:mb-32 font-light ${Poiret_One_Font.className} text-center lg:text-left`}
             >
               I can help you with
               <motion.div className="inline-flex">
@@ -215,7 +215,7 @@ const About = () => {
                   custom={index}
                 >
                   <span className="text-[#696969] mb-4 md:mb-6 text-lg md:text-xl">{item.number}</span>
-                  <h3 className="text-[32px] md:text-[36px] lg:text-[40px] text-white mb-6 md:mb-8 font-light">
+                  <h3 className="text-[32px] md:text-[36px] lg:text-[2.2vw] text-white mb-6 md:mb-8 font-light">
                   {/* {item.title === "Learning & Growth" && (
                   <motion.span 
                   className="inline-block mr-3"
